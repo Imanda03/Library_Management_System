@@ -1,27 +1,36 @@
 <h1>Register</h1>
 
-<h2>Account Created</h2>
+<h2>{{ responseMsg }}</h2>
 
-<mat-grid-list cols="2" rowHeight="100px" gutterSize="10px">
+<mat-grid-list
+  cols="2"
+  rowHeight="100px"
+  gutterSize="10px"
+  [formGroup]="registerForm"
+>
   <mat-grid-tile>
     <mat-form-field appearance="fill" color="accent">
       <mat-label>First Name</mat-label>
       <input matInput formControlName="firstName" />
-      <mat-error>Error</mat-error>
+      <mat-error *ngIf="this.FirstName.invalid">{{
+        getFirstNameError()
+      }}</mat-error>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field appearance="fill" color="accent">
       <mat-label>Last Name</mat-label>
       <input matInput formControlName="lastName" />
-      <mat-error>Error</mat-error>
+      <mat-error *ngIf="this.LastName.invalid">{{
+        getLastNameError()
+      }}</mat-error>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field appearance="fill" color="accent">
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" />
-      <mat-error>Error</mat-error>
+      <mat-error *ngIf="this.Email.invalid">{{ getEmailError() }}</mat-error>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
@@ -35,7 +44,9 @@
       <button mat-icon-button matSuffix (click)="hide = !hide">
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
-      <mat-error>Error</mat-error>
+      <mat-error *ngIf="this.Password.invalid">{{
+        getPasswordError()
+      }}</mat-error>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
@@ -49,11 +60,17 @@
       <button mat-icon-button matSuffix (click)="hide = !hide">
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
-      <mat-error>Error</mat-error>
+      <mat-error>Password must be same</mat-error>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
-    <button mat-flat-button color="accent" class="create-account-btn">
+    <button
+      mat-flat-button
+      color="accent"
+      class="create-account-btn"
+      (click)="register()"
+      [disabled]="registerForm.invalid"
+    >
       Create Account
     </button>
   </mat-grid-tile>

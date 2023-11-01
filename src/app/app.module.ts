@@ -12,6 +12,16 @@ import { LibraryComponent } from './library/library.component';
 import { LoginComponent } from './AUth/login/login.component';
 import { RegisterComponent } from './AUth/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { OrderComponent } from './components/order/order.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { ReturnBookComponent } from './components/return-book/return-book.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { ManageBooksComponent } from './components/manage-books/manage-books.component';
+import { ManageCategoryComponent } from './components/manage-category/manage-category.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +32,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     LibraryComponent,
     LoginComponent,
     RegisterComponent,
+    OrderComponent,
+    OrdersComponent,
+    ReturnBookComponent,
+    UserListComponent,
+    ManageBooksComponent,
+    ManageCategoryComponent,
+    ProfileComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +47,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        },
+        allowedDomains: ['localhost: 7187'],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
